@@ -1,0 +1,10 @@
+# 必要套件
+openpyxl>=3.1.0
+Pillow>=10.0.0
+
+# OCR 引擎（二選一）
+pytesseract>=0.3.10    # 搭配 Tesseract 本機安裝（免費）
+# anthropic>=0.25.0   # 搭配 Claude Vision API（取消註解即啟用）
+
+# PDF 支援（可選，若要讀取 PDF 才需要）
+pdf2image>=1.17.0

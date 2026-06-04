@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>泰國北曼谷之旅規劃 | 台科大能源永續研究所</title>
+  <style>
+    :root {
+      --thai-gold: #c9952a;
+      --thai-red: #a8192e;
+      --thai-blue: #1a3a6e;
+      --thai-green: #2d6a4f;
+      --bg: #fdf8f0;
+      --card: #ffffff;
+      --text: #1a1a1a;
+      --muted: #666;
+      --border: #e8dcc8;
+      --warn-bg: #fff3cd;
+      --warn-border: #ffc107;
+      --danger-bg: #f8d7da;
+      --danger-border: #dc3545;
+      --success-bg: #d4edda;
+      --success-border: #28a745;
+      --info-bg: #d1ecf1;
+      --info-border: #17a2b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--thai-blue) 0%, var(--thai-red) 50%, var(--thai-gold) 100%);
+      color: white;
+      padding: 60px 20px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '🇹🇭';
+      font-size: 120px;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      opacity: 0.12;
+    }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 8px; }
+    .hero p { font-size: 1.1rem; opacity: 0.9; }
+    .hero .meta { margin-top: 16px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .hero .badge {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ── Layout ── */
+    .container { max-width: 960px; margin: 0 auto; padding: 32px 16px 64px; }
+    .section { margin-bottom: 40px; }
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--thai-blue);
+      border-left: 5px solid var(--thai-gold);
+      padding-left: 14px;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    /* ── Alerts ── */
+    .alert {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      border-left: 5px solid;
+    }
+    .alert-warn  { background: var(--warn-bg);    border-color: var(--warn-border); }
+    .alert-danger{ background: var(--danger-bg);  border-color: var(--danger-border); }
+    .alert-success{background: var(--success-bg); border-color: var(--success-border); }
+    .alert-info  { background: var(--info-bg);    border-color: var(--info-border); }
+    .alert .alert-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; }
+
+    /* ── Grid ── */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+
+    /* ── Table ── */
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th { background: var(--thai-blue); color: white; padding: 10px 14px; text-align: left; }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #f9f5ee; }
+
+    /* ── Timeline ── */
+    .timeline { list-style: none; padding: 0; }
+    .timeline li {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+    .timeline .dot {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      background: var(--thai-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: white;
+    }
+    .timeline .content strong { display: block; font-size: 1rem; color: var(--thai-blue); }
+    .timeline .content span { color: var(--muted); font-size: 0.9rem; }
+
+    /* ── Budget table ── */
+    .budget-total {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--thai-red);
+      text-align: right;
+      padding: 14px;
+      border-top: 2px solid var(--thai-gold);
+    }
+
+    /* ── Tag chips ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag {
+      background: var(--thai-blue);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 0.82rem;
+    }
+    .tag.gold { background: var(--thai-gold); }
+    .tag.green { background: var(--thai-green); }
+    .tag.red { background: var(--thai-red); }
+
+    /* ── Checklist ── */
+    .checklist { list-style: none; padding: 0; }
+    .checklist li { padding: 8px 0; border-bottom: 1px dashed var(--border); display: flex; align-items: flex-start; gap: 10px; }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before { content: '☐'; font-size: 1.2rem; color: var(--thai-gold); flex-shrink: 0; margin-top: -2px; }
+
+    /* ── Highlight numbers ── */
+    .big-num { font-size: 2.2rem; font-weight: 800; color: var(--thai-gold); line-height: 1; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
+    .stat-card { text-align: center; padding: 20px; background: var(--thai-blue); color: white; border-radius: 12px; }
+    .stat-card .big-num { color: var(--thai-gold); }
+    .stat-card p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+    /* ── Airline cards ── */
+    .airline-card { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .airline-card:last-child { border-bottom: none; }
+    .airline-name { font-weight: 600; font-size: 1rem; }
+    .airline-info { font-size: 0.85rem; color: var(--muted); }
+    .airline-price { font-size: 1.1rem; font-weight: 700; color: var(--thai-green); white-space: nowrap; }
+
+    /* ── Spot cards ── */
+    .spot-card { padding: 16px; }
+    .spot-card h4 { color: var(--thai-blue); margin-bottom: 6px; font-size: 1rem; }
+    .spot-card p { font-size: 0.88rem; color: var(--muted); }
+    .spot-card .distance { display: inline-block; background: #eef3ff; color: var(--thai-blue); font-size: 0.78rem; padding: 2px 8px; border-radius: 10px; margin-top: 6px; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--thai-blue);
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--thai-gold); text-decoration: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 16px 28px; }
+      .card { padding: 16px; }
+      .airline-card { flex-direction: column; align-items: flex-start; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <h1>🏯 泰國北曼谷研修之旅</h1>
+  <p>北曼谷國王科技大學（KMUTNB）× 教育部新南向學海逐夢</p>
+  <div class="meta">
+    <span class="badge">✈️ 出發：2025年8月4日</span>
+    <span class="badge">🏫 台灣科技大學 能源永續研究所</span>
+    <span class="badge">📍 KMUTNB, Bang Sue, Bangkok</span>
+    <span class="badge">🗓️ 預計停留：約30天</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== 1. 老師叮嚀 ===== -->
+  <div class="section">
+    <h2 class="section-title">📋 昆哲老師 LINE 叮嚀重點</h2>
+
+    <div class="alert alert-danger">
+      <div class="alert-title">🔴 最重要警示：新南向天數 vs 免簽天數衝突</div>
+      老師特別說「這個要很小心喲」——教育部新南向計畫要求在泰國實習<strong>不得少於30天（不含往返交通）</strong>，但台灣護照泰國免簽只有<strong>30天</strong>。若8/4入境，扣掉抵達/返台各一天的交通時日，實習天數可能僅剩28天，不符合規定，須提前規劃延簽或申請教育簽證。
+    </div>
+
+    <div class="alert alert-warn">
+      <div class="alert-title">⚠️ 老師說：「28天」是記憶，官方規定其實是30天</div>
+      老師表示「我印像是28天至少」，但根據教育部官方最新規定，赴泰實習最低天數為<strong>30天（不含來回途程交通時日）</strong>。這比老師記憶的天數更嚴格，請以30天為準。
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:12px;">📝 逐條確認清單</h3>
+        <ul class="checklist">
+          <li>住宿事宜提前與學弟溝通協調</li>
+          <li>確認新南向計畫最低實習天數（官方：30天，不含交通）</li>
+          <li>注意泰國免簽30天上限，規劃準確離境日期</li>
+          <li>確認是否需要申請泰國教育簽證（Non-Immigrant ED）</li>
+          <li>確認無法延後8/31離宿（台科大宿舍）</li>
+          <li>與葛聖謙同行，共同規劃行程</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:12px;">📅 關鍵日期速算</h3>
+        <table>
+          <tr><th>事件</th><th>日期</th></tr>
+          <tr><td>出發日</td><td><strong>2025年8月4日</strong></td></tr>
+          <tr><td>入境泰國（計Day 1）</td><td>8月4日</td></tr>
+          <tr><td>免簽到期（第30天）</td><td><strong>9月2日</strong></td></tr>
+          <tr><td>台科大宿舍最後一天</td><td>8月31日</td></tr>
+          <tr><td>計畫最低實習天數</td><td>30天（不含交通）</td></tr>
+          <tr><td>建議最晚回台日</td><td><strong>9月2日前</strong></td></tr>
+        </table>
+        <div class="alert alert-warn" style="margin-top:12px;margin-bottom:0;">
+          若要符合「30天實習（不含交通）」，入境後隔天才算實習第1天，則需要至少到9/3才夠30天，但這超出30天免簽！建議出發前向台科大國際處確認計算方式，或申請教育簽證延長停留。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 2. 新南向規範 ===== -->
+  <div class="section">
+    <h2 class="section-title">📚 教育部學海逐夢 — 新南向計畫規範</h2>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="big-num">30</div>
+        <p>最低實習天數<br/>（不含來回交通）</p>
+      </div>
+      <div class="stat-card">
+        <div class="big-num">1</div>
+        <p>來回經濟艙機票<br/>（補助1次）</p>
+      </div>
+      <div class="stat-card">
+        <div class="big-num">20%</div>
+        <p>學校配合款<br/>至少佔總補助</p>
+      </div>
+      <div class="stat-card">
+        <div class="big-num">14</div>
+        <p>計畫主持人<br/>最多補助天數</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3 style="color:var(--thai-blue);margin-bottom:14px;">補助內容與申請規範</h3>
+      <table>
+        <thead><tr><th>項目</th><th>規定細節</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>最低實習天數</strong></td>
+            <td>不得少於 <strong>30天</strong>（不含來回途程交通時日）；赴印尼者25天</td>
+          </tr>
+          <tr>
+            <td><strong>補助機票</strong></td>
+            <td>補助一張國際來回經濟艙機票，以一次為限</td>
+          </tr>
+          <tr>
+            <td><strong>生活費補助</strong></td>
+            <td>依教育部核定金額，各校配合款不得少於教育部補助款之20%</td>
+          </tr>
+          <tr>
+            <td><strong>計畫主持人</strong></td>
+            <td>限一人，生活費最多不超過14日</td>
+          </tr>
+          <tr>
+            <td><strong>適用國家</strong></td>
+            <td>新南向18國，包含泰國、越南、印尼、菲律賓、馬來西亞等</td>
+          </tr>
+          <tr>
+            <td><strong>申請單位</strong></td>
+            <td>由學校統一申請，學生由學校選送</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-success">
+      <div class="alert-title">✅ 解決天數衝突的三個方法</div>
+      <ol style="padding-left:20px;margin-top:6px;line-height:2;">
+        <li><strong>方法一（推薦）：出發前辦理泰國教育簽證（Non-Immigrant ED）</strong>——向駐台北泰國貿易辦事處申請，可停留90天，完全解決衝突問題。所需文件：護照、入學許可、學費收據等。</li>
+        <li><strong>方法二：在泰國申請延簽</strong>——在泰國移民局辦理，費用約1,900泰銖（約NT$1,650），可延長30天，但需親自前往辦理。</li>
+        <li><strong>方法三：確認計算方式</strong>——向台科大國際事務處確認，若8/4抵達當天算作實習第1天，則8/4到9/2剛好滿30天，可在9/2或之前回台，符合兩項規定。</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ===== 3. 泰國免簽規定 ===== -->
+  <div class="section">
+    <h2 class="section-title">🛂 泰國入境規定（2025年最新）</h2>
+
+    <div class="alert alert-info">
+      <div class="alert-title">ℹ️ 2025年新制：必須申請 TDAC 電子入境卡</div>
+      自2025年5月1日起，所有外籍旅客入境泰國須在抵達前72小時內完成線上TDAC申請，取代過去的紙本TM.6入境卡。未申請者將無法順利通關！
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:12px;">🇹🇭 台灣旅客免簽條件</h3>
+        <table>
+          <tr><th>項目</th><th>規定</th></tr>
+          <tr><td>免簽停留天數</td><td><strong>30天</strong></td></tr>
+          <tr><td>護照有效期限</td><td>入境時至少剩 <strong>6個月</strong></td></tr>
+          <tr><td>財力證明</td><td>每人至少 <strong>2萬泰銖</strong>（或等值外幣）</td></tr>
+          <tr><td>來回機票</td><td>須持有離境機票或訂單</td></tr>
+          <tr><td>住宿證明</td><td>建議備妥飯店訂房記錄</td></tr>
+          <tr><td>可否延簽</td><td>可至移民局延長30天（費用1,900泰銖）</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:12px;">📱 TDAC 電子入境卡申請教學</h3>
+        <ul class="timeline">
+          <li>
+            <div class="dot">1</div>
+            <div class="content">
+              <strong>入境前72小時內</strong>
+              <span>前往官方網站 tdac.immigration.go.th</span>
+            </div>
+          </li>
+          <li>
+            <div class="dot">2</div>
+            <div class="content">
+              <strong>填寫個人資料</strong>
+              <span>姓名、出生日期、護照號碼、國籍、職業</span>
+            </div>
+          </li>
+          <li>
+            <div class="dot">3</div>
+            <div class="content">
+              <strong>填寫行程資訊</strong>
+              <span>航班號碼、抵達/離境日期、住宿地址</span>
+            </div>
+          </li>
+          <li>
+            <div class="dot">4</div>
+            <div class="content">
+              <strong>取得QR Code</strong>
+              <span>系統寄送含QR Code的電子入境卡到信箱</span>
+            </div>
+          </li>
+          <li>
+            <div class="dot">5</div>
+            <div class="content">
+              <strong>⚠️ 完全免費</strong>
+              <span>索取費用即是詐騙，請只使用官方網站</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 4. 機票資訊 ===== -->
+  <div class="section">
+    <h2 class="section-title">✈️ 機票資訊（台北 ↔ 曼谷）</h2>
+
+    <div class="alert alert-warn">
+      <div class="alert-title">⚠️ 8月暑假為旺季，建議盡早購票！</div>
+      8月為泰國旅遊旺季兼暑假，機票價格較其他月份高。建議提前1-2個月訂票，並多比較各平台（Skyscanner、ezTravel、Trip.com）。
+    </div>
+
+    <div class="card">
+      <h3 style="color:var(--thai-blue);margin-bottom:16px;">主要航空公司比較（台北TPE → 曼谷BKK）</h3>
+      <div class="airline-card">
+        <div>
+          <div class="airline-name">🛫 中華航空 China Airlines</div>
+          <div class="airline-info">直飛 · 飛行約4小時 · 桃園TPE → 素萬那普BKK</div>
+        </div>
+        <div class="airline-price">來回約 NT$12,000–18,000</div>
+      </div>
+      <div class="airline-card">
+        <div>
+          <div class="airline-name">🛫 長榮航空 EVA Air</div>
+          <div class="airline-info">直飛 · 飛行約4小時 · 桃園TPE → 素萬那普BKK</div>
+        </div>
+        <div class="airline-price">來回約 NT$12,000–18,000</div>
+      </div>
+      <div class="airline-card">
+        <div>
+          <div class="airline-name">🛫 台灣虎航 Tigerair Taiwan</div>
+          <div class="airline-info">直飛 · 低成本 · 行李需另加購 · 桃園TPE → BKK</div>
+        </div>
+        <div class="airline-price">來回約 NT$6,000–10,000</div>
+      </div>
+      <div class="airline-card">
+        <div>
+          <div class="airline-name">🛫 泰國獅子航空 Thai Lion Air</div>
+          <div class="airline-info">直飛 · 低成本 · 桃園TPE → 廊曼DMK（較接近KMUTNB）</div>
+        </div>
+        <div class="airline-price">來回約 NT$5,000–9,000</div>
+      </div>
+      <div class="airline-card">
+        <div>
+          <div class="airline-name">🛫 泰越捷 Thai Vietjet</div>
+          <div class="airline-info">直飛 · 低成本 · 行李需另計</div>
+        </div>
+        <div class="airline-price">來回約 NT$5,000–8,000</div>
+      </div>
+      <div class="alert alert-success" style="margin-top:16px;margin-bottom:0;">
+        <div class="alert-title">💡 小提示：選廊曼機場（DMK）更近KMUTNB！</div>
+        廊曼國際機場（Don Mueang, DMK）位於北曼谷，距KMUTNB車程約20-30分鐘，比素萬那普（BKK，南部）更近。建議選飛廊曼的航班，省時又省錢！
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 5. KMUTNB & 住宿 ===== -->
+  <div class="section">
+    <h2 class="section-title">🏫 北曼谷國王科技大學（KMUTNB）& 住宿</h2>
+
+    <div class="card">
+      <h3 style="color:var(--thai-blue);margin-bottom:12px;">📍 學校基本資訊</h3>
+      <table>
+        <tr><th>項目</th><th>資訊</th></tr>
+        <tr><td>英文名稱</td><td>King Mongkut's University of Technology North Bangkok</td></tr>
+        <tr><td>地址</td><td>1518 Pracharat 1 Road, Wongsawang, Bang Sue, Bangkok 10800</td></tr>
+        <tr><td>最近捷運站</td><td>MRT Wong Sawang 站（步行約10分鐘）</td></tr>
+        <tr><td>官網</td><td>www.kmutnb.ac.th</td></tr>
+        <tr><td>電話</td><td>+66 2 555 2000</td></tr>
+      </table>
+    </div>
+
+    <h3 style="margin: 20px 0 12px; font-size:1.1rem; color:var(--thai-blue);">🏨 附近住宿推薦</h3>
+    <div class="grid-2">
+      <div class="card spot-card">
+        <h4>🏠 Prukpibul Apartment</h4>
+        <p>距KMUTNB步行可達，學生宿舍式公寓，附冷氣、熱水、WiFi</p>
+        <p style="margin-top:8px;"><strong>價格：</strong>約 4,200 THB/月（≈ NT$3,700）</p>
+        <span class="distance">🚶 步行至KMUTNB</span>
+      </div>
+      <div class="card spot-card">
+        <h4>🏠 PK Place Wongsawang</h4>
+        <p>靠近MRT及公車站，提供大床房、私人浴室、冷氣、陽台</p>
+        <p style="margin-top:8px;"><strong>價格：</strong>約 4,700 THB/月（≈ NT$4,100）</p>
+        <span class="distance">🚇 近MRT Wong Sawang</span>
+      </div>
+      <div class="card spot-card">
+        <h4>🏠 SVP Place Wongsawang</h4>
+        <p>新裝潢公寓，近BTS/MRT站，設施完善，適合長期居住</p>
+        <p style="margin-top:8px;"><strong>價格：</strong>約 4,000 THB/月（≈ NT$3,500）起</p>
+        <span class="distance">🚇 近BTS/MRT站</span>
+      </div>
+      <div class="card spot-card">
+        <h4>🏨 The Line Wongsawang</h4>
+        <p>現代化公寓，距Wong Sawang MRT僅200公尺，生活機能佳</p>
+        <p style="margin-top:8px;"><strong>價格：</strong>約 12,000–15,000 THB/月（≈ NT$10,500–13,000）</p>
+        <span class="distance">🚇 MRT 200m</span>
+      </div>
+    </div>
+
+    <div class="alert alert-info" style="margin-top:8px;">
+      <div class="alert-title">💡 住宿建議</div>
+      作為交換生，建議先聯絡KMUTNB國際辦公室詢問是否有學生宿舍（Dormitory）可申請，通常價格最優惠且在校內，約3,000–5,000 THB/月。外部公寓可透過 renthub.in.th 或 baanfinder.com 搜尋「Wongsawang」或「KMUTNB」。
+    </div>
+  </div>
+
+  <!-- ===== 6. 景點 ===== -->
+  <div class="section">
+    <h2 class="section-title">🗺️ 景點推薦</h2>
+
+    <h3 style="margin-bottom:12px;color:var(--thai-green);">🏘️ KMUTNB 附近景點（Chatuchak / Bang Sue 區域）</h3>
+    <div class="grid-3">
+      <div class="card spot-card">
+        <h4>🛍️ 恰圖恰週末市集</h4>
+        <p>全球最大週末市集，15,000個攤位，服飾、手工藝、美食、二手品樣樣俱全</p>
+        <p style="margin-top:6px;font-size:0.82rem;color:var(--thai-red);">⏰ 週六日 09:00–18:00</p>
+        <span class="distance">🚇 MRT Chatuchak Park</span>
+      </div>
+      <div class="card spot-card">
+        <h4>🏬 DD Mall（舊Bang Sue Junction）</h4>
+        <p>恰圖恰對面，販售復古二手商品，尋寶愛好者天堂</p>
+        <span class="distance">🚇 恰圖恰市集旁</span>
+      </div>
+      <div class="card spot-card">
+        <h4>🏬 Mixt Chatuchak</h4>
+        <p>室內版恰圖恰，冷氣舒適，有美食街，下雨天逛街好選擇</p>
+        <span class="distance">🚇 MRT Chatuchak Park旁</span>
+      </div>
+    </div>
+
+    <h3 style="margin: 20px 0 12px;color:var(--thai-green);">🌏 曼谷必去經典景點</h3>
+    <div class="grid-3">
+      <div class="card spot-card">
+        <h4>🏯 大皇宮 Grand Palace</h4>
+        <p>曼谷地標，泰國王室宮殿，金碧輝煌、壯觀無比</p>
+        <p style="font-size:0.82rem;color:var(--muted);">票價：500泰銖 | 注意服裝規定</p>
+      </div>
+      <div class="card spot-card">
+        <h4>⛩️ 臥佛寺 Wat Pho</h4>
+        <p>46公尺超長臥佛，也是泰式按摩發源地，附設按摩學校</p>
+        <p style="font-size:0.82rem;color:var(--muted);">票價：200泰銖</p>
+      </div>
+      <div class="card spot-card">
+        <h4>🌸 鄭王廟 Wat Arun</h4>
+        <p>昭披耶河畔的黎明寺，夕陽時景色絕美</p>
+        <p style="font-size:0.82rem;color:var(--muted);">票價：100泰銖</p>
+      </div>
+      <div class="card spot-card">
+        <h4>🌃 考山路 Khao San Road</h4>
+        <p>背包客聖地，夜市、酒吧、路邊攤，24小時熱鬧不夜城</p>
+        <p style="font-size:0.82rem;color:var(--muted);">免費入場 | 注意扒手</p>
+      </div>
+      <div class="card spot-card">
+        <h4>🛒 MBK Center</h4>
+        <p>平價電子產品、手機配件、衣服，能殺價，學生最愛</p>
+        <p style="font-size:0.82rem;color:var(--muted);">近BTS Siam站</p>
+      </div>
+      <div class="card spot-card">
+        <h4>🌿 Lumphini公園</h4>
+        <p>市中心最大公園，有巨蜥可看，晨跑、划船好去處</p>
+        <p style="font-size:0.82rem;color:var(--muted);">免費 | 近MRT Lumphini</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 7. 美食 ===== -->
+  <div class="section">
+    <h2 class="section-title">🍜 美食推薦</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:14px;">🍽️ 必吃街邊小吃</h3>
+        <ul class="checklist">
+          <li><strong>打拋豬飯</strong>（Pad Kra Pao）— 泰國國民美食，40–60 THB，隨處可得</li>
+          <li><strong>泰式炒河粉</strong>（Pad Thai）— 雞蛋、豆芽、花生，50–80 THB</li>
+          <li><strong>船麵</strong>（Boat Noodles）— 濃郁豬血湯底，一碗僅20–35 THB</li>
+          <li><strong>椰子冰淇淋</strong> — 天然椰子殼盛裝，恰圖恰必吃，50–70 THB</li>
+          <li><strong>芒果糯米飯</strong>（Mango Sticky Rice）— 甜點首選，80–120 THB</li>
+          <li><strong>泰式奶茶</strong>（Thai Tea）— 濃郁甜香，25–50 THB</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:14px;">🏪 恰圖恰市集必吃</h3>
+        <ul class="checklist">
+          <li>現做豬肉丸（5區，現壓現煮，配辣醬超好吃）</li>
+          <li>椰子冰淇淋（市集內多攤，椰子殼盛裝）</li>
+          <li>香蕉煎餅（Roti）— 現煎，加煉乳或花生醬</li>
+          <li>泰式水果冰棒（顏色繽紛，拍照必備）</li>
+          <li>Mixt Chatuchak美食街（室內冷氣，多樣選擇）</li>
+          <li>新鮮椰子水（直接插管喝，解熱必備）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert alert-info" style="margin-top:8px;">
+      <div class="alert-title">🌶️ 點餐提示</div>
+      點餐時說「<strong>Mai Pet</strong>（ไม่เผ็ด）」= 不要辣；「<strong>Pet Noi</strong>（เผ็ดน้อย）」= 微辣。曼谷許多街邊攤不接受信用卡，記得換好泰銖現金。
+    </div>
+  </div>
+
+  <!-- ===== 8. 交通 ===== -->
+  <div class="section">
+    <h2 class="section-title">🚇 交通指南</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:12px;">🚊 大眾交通</h3>
+        <table>
+          <thead><tr><th>交通方式</th><th>說明</th><th>費用</th></tr></thead>
+          <tbody>
+            <tr><td><strong>MRT地鐵</strong></td><td>KMUTNB最近站：Wong Sawang</td><td>16–42 THB/趟</td></tr>
+            <tr><td><strong>BTS空鐵</strong></td><td>覆蓋市區主要商圈</td><td>17–59 THB/趟</td></tr>
+            <tr><td><strong>機場快線</strong></td><td>素萬那普BKK → 市區約30分</td><td>15–45 THB</td></tr>
+            <tr><td><strong>公車</strong></td><td>最便宜，但路線複雜</td><td>8–20 THB</td></tr>
+            <tr><td><strong>昭披耶河渡輪</strong></td><td>遊覽沿河景點</td><td>15–40 THB</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:12px;">🚗 計程車 / 網約車</h3>
+        <ul class="checklist">
+          <li><strong>Grab App</strong>（推薦）— 類似Uber，價格透明，不會被坑</li>
+          <li>計程車費約為台灣的1/2，起跳35 THB</li>
+          <li>搭計程車務必要求<strong>開計費錶（Meter）</strong></li>
+          <li>嘟嘟車（Tuk Tuk）適合短程，先議好價格</li>
+          <li>機車計程車（摩托計程車）戴橘色背心，短距離快捷</li>
+        </ul>
+        <div class="alert alert-warn" style="margin-top:12px;margin-bottom:0;">
+          <strong>⚠️ 防騙警告：</strong>計程車說計費錶壞了、帶你去特定商店（commission店）都是詐騙，請拒絕並換車。
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:8px;">
+      <h3 style="color:var(--thai-blue);margin-bottom:12px;">🛣️ 廊曼機場（DMK）→ KMUTNB 交通</h3>
+      <table>
+        <thead><tr><th>方式</th><th>路線</th><th>時間</th><th>費用</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Grab (推薦)</strong></td>
+            <td>直達KMUTNB</td>
+            <td>約20–35分鐘</td>
+            <td>約150–250 THB</td>
+          </tr>
+          <tr>
+            <td><strong>公車A1</strong></td>
+            <td>廊曼 → BTS Mo Chit → 轉MRT至Wong Sawang</td>
+            <td>約60–90分鐘</td>
+            <td>約60–80 THB</td>
+          </tr>
+          <tr>
+            <td><strong>計程車</strong></td>
+            <td>直達KMUTNB（過路費另計）</td>
+            <td>約20–40分鐘</td>
+            <td>約200–350 THB</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 9. 必買 ===== -->
+  <div class="section">
+    <h2 class="section-title">🛍️ 必買清單</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:14px;">🎁 伴手禮 & 必買</h3>
+        <ul class="checklist">
+          <li><strong>泰國香皂 / 手工皂</strong> — 天然香精，便宜又好用，超市有售</li>
+          <li><strong>Tiger Balm 虎標萬金油</strong> — 蚊蟲叮咬、肌肉疲勞必備</li>
+          <li><strong>泰式按摩油</strong> — 品質好、價格比台灣便宜</li>
+          <li><strong>泰國香米 / 茉莉花米</strong> — 帶回家的好選擇（注意重量限制）</li>
+          <li><strong>泰式辣椒醬 / Nam Prik Pao</strong> — 各種口味，超市購買</li>
+          <li><strong>大象圖案商品</strong> — 泰國象徵，恰圖恰攤位價格最實惠</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:14px;">👗 恰圖恰市集必買</h3>
+        <ul class="checklist">
+          <li><strong>皮革皮件</strong> — 皮帶、錢包、包包，品質佳且可議價</li>
+          <li><strong>藤編草編包</strong> — 泰國特色工藝，輕巧好看</li>
+          <li><strong>泰棉製品</strong> — 涼爽透氣，很適合泰國氣候</li>
+          <li><strong>二手古著</strong> — DD Mall区域，很多復古寶貝</li>
+          <li><strong>手工銀飾</strong> — 部落風格獨特設計，價格比商場便宜</li>
+          <li><strong>植物 / 多肉</strong> — 恰圖恰有植物區，種類豐富（注意海關規定）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 10. 預計花費 ===== -->
+  <div class="section">
+    <h2 class="section-title">💰 預計花費（約30天）</h2>
+
+    <div class="alert alert-success">
+      <div class="alert-title">✅ 新南向補助說明</div>
+      教育部新南向補助包含一張國際來回經濟艙機票 + 生活費補助，實際補助金額依台科大計畫核定。建議洽詢台科大國際事務處確認補助金額，以下花費為<strong>未計補助之個人實際支出參考</strong>。
+    </div>
+
+    <div class="card">
+      <table>
+        <thead><tr><th>項目</th><th>估計費用（泰銖）</th><th>估計費用（新台幣）</th><th>備註</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>✈️ 來回機票</strong></td>
+            <td>—</td>
+            <td>NT$6,000–15,000</td>
+            <td>低成本航空最便宜；新南向可補助</td>
+          </tr>
+          <tr>
+            <td><strong>🏨 住宿（30天）</strong></td>
+            <td>4,000–7,000 THB</td>
+            <td>NT$3,500–6,100</td>
+            <td>學生宿舍/平價公寓/每月租</td>
+          </tr>
+          <tr>
+            <td><strong>🍜 飲食（30天）</strong></td>
+            <td>5,000–9,000 THB</td>
+            <td>NT$4,400–7,900</td>
+            <td>街邊小吃約150–250 THB/天</td>
+          </tr>
+          <tr>
+            <td><strong>🚇 交通（30天）</strong></td>
+            <td>1,500–2,500 THB</td>
+            <td>NT$1,300–2,200</td>
+            <td>MRT月票 + 偶爾Grab</td>
+          </tr>
+          <tr>
+            <td><strong>🗺️ 景點門票</strong></td>
+            <td>1,500–3,000 THB</td>
+            <td>NT$1,300–2,600</td>
+            <td>大皇宮500、臥佛寺200…等</td>
+          </tr>
+          <tr>
+            <td><strong>🛍️ 購物</strong></td>
+            <td>3,000–15,000 THB</td>
+            <td>NT$2,600–13,000</td>
+            <td>依個人消費習慣差異很大</td>
+          </tr>
+          <tr>
+            <td><strong>💊 備用/緊急</strong></td>
+            <td>2,000 THB</td>
+            <td>NT$1,750</td>
+            <td>生病看診、意外支出</td>
+          </tr>
+          <tr>
+            <td><strong>📶 泰國SIM卡</strong></td>
+            <td>300–600 THB</td>
+            <td>NT$260–520</td>
+            <td>True/DTAC/AIS 30天吃到飽方案</td>
+          </tr>
+          <tr>
+            <td><strong>🛂 TDAC（免費）</strong></td>
+            <td>0 THB</td>
+            <td>NT$0</td>
+            <td>官方免費，切勿付費</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="budget-total">
+        預估總花費：NT$21,000–49,000（機票已含）<br/>
+        <span style="font-size:0.9rem;font-weight:400;color:var(--muted);">若新南向補助機票及部分生活費，個人實際支出可降低NT$10,000–20,000</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 11. 注意事項 ===== -->
+  <div class="section">
+    <h2 class="section-title">⚠️ 重要注意事項</h2>
+
+    <div class="grid-2">
+      <div>
+        <div class="alert alert-danger">
+          <div class="alert-title">🔴 法律 & 安全</div>
+          <ul style="padding-left:18px;margin-top:6px;line-height:2;">
+            <li>泰國<strong>嚴禁毒品</strong>，持有即可能面臨死刑，切勿嘗試</li>
+            <li>不得冒犯王室，談論或批評皇室可能觸犯冒犯君主罪</li>
+            <li>進寺廟需穿著保守（遮肩、遮膝），部分景點有服裝規定</li>
+            <li>護照或複印件隨身攜帶，正本建議鎖在住宿</li>
+          </ul>
+        </div>
+        <div class="alert alert-warn">
+          <div class="alert-title">⚠️ 健康 & 氣候</div>
+          <ul style="padding-left:18px;margin-top:6px;line-height:2;">
+            <li>8月為雨季，常有午後雷陣雨，攜帶摺疊雨傘</li>
+            <li>高溫高濕，隨時補水，避免中暑</li>
+            <li>注意登革熱，使用防蚊液，特別是黃昏時段</li>
+            <li>路邊攤生食（沙拉、冰塊）慎食，初到可能腸胃不適</li>
+            <li>建議投保旅遊醫療險</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-info">
+          <div class="alert-title">ℹ️ 生活 & 文化</div>
+          <ul style="padding-left:18px;margin-top:6px;line-height:2;">
+            <li>泰國人重視「面子」，避免公開爭吵，保持微笑</li>
+            <li>不要用腳指向人或觸碰他人頭部（不敬）</li>
+            <li>泰國佛像神聖，不要擺出不敬的拍照姿勢</li>
+            <li>換錢在機場匯率較差，建議在市區Super Rich等換錢所換</li>
+            <li>泰銖現金仍普遍，建議帶足現金，小攤不接受刷卡</li>
+          </ul>
+        </div>
+        <div class="alert alert-success">
+          <div class="alert-title">✅ 出發前必備清單</div>
+          <ul style="padding-left:18px;margin-top:6px;line-height:2;">
+            <li>護照（效期6個月以上）+ 多備複印件</li>
+            <li>TDAC電子入境卡（入境前72小時申請）</li>
+            <li>確認離境機票</li>
+            <li>泰銖現金（建議先換10,000泰銖）</li>
+            <li>旅遊醫療保險</li>
+            <li>常備藥品（腸胃藥、退燒藥、防蚊液）</li>
+            <li>信用卡（通知銀行出國使用）</li>
+            <li>學校証明文件（住宿申請、計畫書等）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 12. 換匯攻略 ===== -->
+  <div class="section">
+    <h2 class="section-title">💱 換匯攻略（台幣 → 泰銖）</h2>
+
+    <div class="alert alert-success">
+      <div class="alert-title">✅ 結論：帶美金現金去 SuperRich / Happy Rich 換 = 最划算</div>
+      一個月下來比全程用ATM提款省約 <strong>NT$2,000</strong>。簽帳金融卡留著當緊急備用即可。
+    </div>
+
+    <div class="card">
+      <h3 style="color:var(--thai-blue);margin-bottom:14px;">三種方式費用比較（換 30,000 泰銖為例）</h3>
+      <table>
+        <thead><tr><th>方式</th><th>匯率損失</th><th>手續費</th><th>合計多花</th><th>建議</th></tr></thead>
+        <tbody>
+          <tr style="background:#d4edda;">
+            <td><strong>💵 美金現金 → SuperRich / Happy Rich</strong></td>
+            <td>幾乎 0</td>
+            <td>NT$0</td>
+            <td><strong style="color:var(--thai-green);">≈ NT$0</strong></td>
+            <td>⭐ 主力推薦</td>
+          </tr>
+          <tr>
+            <td><strong>💳 中信簽帳金融卡 ATM 提款</strong></td>
+            <td>1.5% ≈ NT$830</td>
+            <td>泰國ATM 220 THB × 5次 + 中信 NT$75 × 5次 ≈ NT$1,335</td>
+            <td><strong style="color:var(--thai-red);">≈ NT$2,165</strong></td>
+            <td>緊急備用</td>
+          </tr>
+          <tr>
+            <td><strong>🏦 美金 → 泰國銀行臨櫃換</strong></td>
+            <td>比SuperRich差2–3% ≈ NT$1,650</td>
+            <td>可能另收手續費</td>
+            <td><strong style="color:var(--thai-red);">≈ NT$1,800+</strong></td>
+            <td>不推薦</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:12px;">📍 KMUTNB 附近換匯地點</h3>
+        <div style="border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:14px;">
+          <strong>🔵 Happy Rich Don Mueang（廊曼機場旁）</strong>
+          <p style="font-size:0.88rem;margin-top:6px;color:var(--muted);">廊曼機場國際航廈 6號出口，跨空橋往火車站方向，藍色貨櫃屋</p>
+          <p style="font-size:0.88rem;color:var(--muted);">⏰ 06:00–21:00 ｜ 美金、台幣都收 ｜ 下飛機就能換</p>
+          <span class="tag" style="margin-top:8px;display:inline-block;">距KMUTNB 車程20–30分</span>
+        </div>
+        <div>
+          <strong>🟠 SuperRich（MRT Chatuchak Park 站旁）</strong>
+          <p style="font-size:0.88rem;margin-top:6px;color:var(--muted);">MRT Chatuchak Park 站出站後商場內，曼谷市區最優匯率之一</p>
+          <p style="font-size:0.88rem;color:var(--muted);">需攜帶護照</p>
+          <span class="tag green" style="margin-top:8px;display:inline-block;">MRT搭2–3站，約10–15分</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="color:var(--thai-blue);margin-bottom:12px;">💡 換匯建議策略</h3>
+        <ul class="timeline">
+          <li>
+            <div class="dot">1</div>
+            <div class="content">
+              <strong>出發前在台灣換好美金</strong>
+              <span>台灣銀行 App 線上換匯 → 桃園機場取款（免手續費）</span>
+            </div>
+          </li>
+          <li>
+            <div class="dot">2</div>
+            <div class="content">
+              <strong>下廊曼機場 → Happy Rich 先換小額</strong>
+              <span>換 3,000–5,000 THB 夠前幾天使用</span>
+            </div>
+          </li>
+          <li>
+            <div class="dot">3</div>
+            <div class="content">
+              <strong>安頓後 → MRT Chatuchak SuperRich 換大額</strong>
+              <span>剩下的美金在這裡換，匯率最好</span>
+            </div>
+          </li>
+          <li>
+            <div class="dot">4</div>
+            <div class="content">
+              <strong>中信簽帳卡備用</strong>
+              <span>緊急時才用ATM，每次費用約 NT$270（泰國ATM 220 THB + 中信 NT$75）</span>
+            </div>
+          </li>
+        </ul>
+        <div class="alert alert-warn" style="margin-top:12px;margin-bottom:0;">
+          💡 換美金時盡量帶 <strong>$100 面額大鈔</strong>，SuperRich 給的匯率比小面額更好！
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 13. 行前確認 ===== -->
+  <div class="section">
+    <h2 class="section-title">✅ 行前確認大清單</h2>
+    <div class="card">
+      <div class="grid-2">
+        <div>
+          <h4 style="margin-bottom:10px;color:var(--thai-blue);">📋 文件 & 簽證</h4>
+          <ul class="checklist">
+            <li>護照有效期限確認（6個月以上）</li>
+            <li>TDAC電子入境卡申請（出發前72小時）</li>
+            <li>決定免簽或申請教育簽證（與老師/國際處確認）</li>
+            <li>來回機票訂購完成</li>
+            <li>住宿預訂/與學弟溝通完成</li>
+            <li>KMUTNB入學/交換相關文件</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom:10px;color:var(--thai-blue);">🎒 行李 & 其他</h4>
+          <ul class="checklist">
+            <li>旅遊平安險/醫療險投保</li>
+            <li>台灣宿舍8/31退宿處理完畢</li>
+            <li>通知銀行出國刷卡</li>
+            <li>準備泰銖現金（建議出發前先換）</li>
+            <li>下載Grab、Google Maps（離線地圖）</li>
+            <li>確認新南向計畫補助款項及報帳方式</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>🏫 台灣科技大學 能源永續研究所 × 北曼谷國王科技大學（KMUTNB）研修計畫</p>
+  <p style="margin-top:6px;">資料整理日期：2025年6月 | 出發日期：2025年8月4日</p>
+  <p style="margin-top:6px;font-size:0.8rem;opacity:0.7;">
+    本頁資訊僅供參考，機票及住宿價格請以實際訂購為準。
+    補助金額及規範請洽台科大國際事務處確認最新規定。
+  </p>
+</footer>
+
+</body>
+</html>
